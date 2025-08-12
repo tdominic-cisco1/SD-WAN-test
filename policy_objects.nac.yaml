@@ -1,0 +1,93 @@
+---
+# Localized Policies
+sdwan:
+  policy_objects:
+    color_lists:
+      - name: CL-PRIVATE
+        colors:
+          - mpls
+      - name: CL-INTERNET
+        colors:
+          - biz-internet
+    site_lists:
+      - name: SL-DC
+        site_ids:
+          - 101
+      - name: SL-BRANCH
+        site_id_ranges:
+          - from: 102
+            to: 103
+    vpn_lists:
+      - name: VPN-LAN
+        vpn_ids:
+          - 1
+    application_lists:
+      - name: OFFICE365
+        applications:
+          - ms-ocs-file-transfer
+          - ms-office-365
+          - ms-office-web-apps
+          - ms-live-accounts
+          - exchange
+          - ms-teams
+          - ms-teams-audio
+          - ms-teams-media
+          - ms-teams-video
+          - netshow
+          - msnp
+          - ms-lync
+          - ms-lync-audio
+          - ms-lync-control
+          - ms-lync-video
+          - skype
+          - skydrive
+          - share-point
+          - outlook-web-service
+      - name: VOICE-APPS
+        applications:
+          - rtp
+          - webex-audio
+          - sip
+      - name: BUSINESS-APPS
+        applications:
+          - sap
+          - citrix
+          - salesforce
+          - kerberos
+          - tacacs
+      - name: BULK-APPS
+        applications:
+          - ftp
+          - ftp-data
+          - ssh
+          - lotus-notes
+          - iperf
+      - name: LOW-PRIORITY-APPS
+        applications:
+          - windows-update
+          - ms-update
+    sla_classes:
+      - name: SLA-DEFAULT
+        jitter_ms: 300
+        latency_ms: 300
+        loss_percentage: 5
+        fallback_best_tunnel_criteria: loss-latency
+      - name: SLA-VOICE
+        jitter_ms: 50
+        latency_ms: 100
+        loss_percentage: 1
+        fallback_best_tunnel_criteria: latency
+      - name: SLA-BUSINESS
+        jitter_ms: 100
+        latency_ms: 150
+        loss_percentage: 1
+        fallback_best_tunnel_criteria: loss
+      - name: SLA-BULK
+        jitter_ms: 100
+        latency_ms: 150
+        loss_percentage: 2
+        fallback_best_tunnel_criteria: loss-latency
+      - name: SLA-LOW-PRIORITY
+        latency_ms: 200
+        loss_percentage: 3
+        fallback_best_tunnel_criteria: loss-latency
